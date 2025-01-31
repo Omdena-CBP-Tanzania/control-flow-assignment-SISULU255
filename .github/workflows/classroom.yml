@@ -1,26 +1,31 @@
-name: Python Control Structures Assignment
+on:
+  push:
+    branches:
+      - main  # Trigger when changes are pushed to the 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger for pull requests on the 'main' branch
 
-test_cases:
-  - name: Test while loop
-    setup: ""
-    run: "python3 tests/test_assignment.py TestControlStructures.test_while_loop"
-    input: ""
-    output: ""
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-  - name: Test for loop with continue
-    setup: ""
-    run: "python3 tests/test_assignment.py TestControlStructures.test_for_loop_continue"
-    input: ""
-    output: ""
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  - name: Test if-else statement
-    setup: ""
-    run: "python3 tests/test_assignment.py TestControlStructures.test_if_else"
-    input: ""
-    output: ""
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Specify your Python version
 
-  - name: Test nested loops
-    setup: ""
-    run: "python3 tests/test_assignment.py TestControlStructures.test_nested_loops"
-    input: ""
-    output: ""
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Install any required dependencies
+
+      - name: Run test cases
+        run: |
+          python3 tests/test_assignment.py TestControlStructures.test_while_loop
+          python3 tests/test_assignment.py TestControlStructures.test_for_loop_continue
+          python3 tests/test_assignment.py TestControlStructures.test_if_else
+          python3 tests/test_assignment.py TestControlStructures.test_nested_loops
