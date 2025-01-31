@@ -1,5 +1,4 @@
 name: Python Control Structures Assignment
-on: [push, pull_request]
 
 test_cases:
   - name: Test while loop
